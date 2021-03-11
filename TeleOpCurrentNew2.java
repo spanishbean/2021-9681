@@ -19,8 +19,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@TeleOp(name ="TeleOpCurrentNew", group = "TeleOP")
-public class TeleOpCurrentNew extends OpMode {
+@TeleOp(name ="TeleOpCurrentNew2", group = "TeleOP")
+public class TeleOpCurrentNew2 extends OpMode {
     DcMotor frontRight;
     DcMotor frontLeft;
     DcMotor backRight;
@@ -60,7 +60,7 @@ public class TeleOpCurrentNew extends OpMode {
 
     private void setRaiseArmPower(double armPower, double multiplier){
         raiseArm1.setPower(armPower*multiplier);
-      //  raiseArm2.setPower(armPower*multiplier);
+        //  raiseArm2.setPower(armPower*multiplier);
         return;
     }
 
@@ -95,7 +95,7 @@ public class TeleOpCurrentNew extends OpMode {
         backRight.setPower(bRightPower/powerButton);
 
         raiseArm1.setDirection(DcMotorSimple.Direction.FORWARD);
-     //
+        //
         //
         //
         //
@@ -207,7 +207,7 @@ public class TeleOpCurrentNew extends OpMode {
             }
             //If the driver is trying to move the arm down:
             else if (rawRaiseValue < 0) {
-                setRaiseArmPower(0.1, 0.35);
+                setRaiseArmPower(-1.0, 0.35);  // Maybe change armPower
             }
             //If the driver is not moving the arm
             else{
@@ -222,7 +222,7 @@ public class TeleOpCurrentNew extends OpMode {
             }
             //If the driver is trying to move the arm down:
             else if (rawRaiseValue < 0) {
-                setRaiseArmPower(0, 1);
+                setRaiseArmPower(-0.25, 1);  // Maybe change armPower
             }
             //If the driver is not moving the arm
             else {
