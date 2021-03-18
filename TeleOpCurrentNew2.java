@@ -1,26 +1,27 @@
-// THIS IS THE NEW CODE CLAIRE MADE ON SUNDAY 3/7/21 THAT INCLUDES THE TWO MOTORS FOR THE ARM AND THE 3 SERVOS FOR THE WRIST
+
+// THIS IS FROM THE NEW CODE CLAIRE MADE ON SUNDAY 3/7/21, but now Abby changed the wrist and servo controls on 3/17/21
 
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.util.Range;
+        import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+        import com.qualcomm.robotcore.hardware.CRServo;
+        import com.qualcomm.robotcore.hardware.DcMotor;
+        import com.qualcomm.robotcore.hardware.DcMotorSimple;
+        import com.qualcomm.robotcore.util.Range;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
-import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
-import com.qualcomm.robotcore.hardware.Servo;
+        import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+        import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+        import com.qualcomm.robotcore.hardware.CRServo;
+        import com.qualcomm.robotcore.hardware.DcMotor;
+        import com.qualcomm.robotcore.hardware.DcMotorSimple;
+        import com.qualcomm.robotcore.hardware.DigitalChannel;
+        import com.qualcomm.robotcore.util.ElapsedTime;
+        import com.qualcomm.robotcore.util.Range;
+        import com.qualcomm.robotcore.hardware.Servo;
 
-@TeleOp(name ="TeleOpCurrentNew2", group = "TeleOP")
-public class TeleOpCurrentNew2 extends OpMode {
+@TeleOp(name ="current teleop", group = "TeleOP")
+public class TeleopNewCurrent2 extends OpMode {
     DcMotor frontRight;
     DcMotor frontLeft;
     DcMotor backRight;
@@ -30,7 +31,7 @@ public class TeleOpCurrentNew2 extends OpMode {
     DcMotor extendArm;
     Servo claw1;
     Servo claw2;
-    CRServo wrist;
+    Servo wrist;
     boolean powerControl = false;
     double powerGiven =0;
     boolean clamp = false;
@@ -55,7 +56,9 @@ public class TeleOpCurrentNew2 extends OpMode {
         claw2 = hardwareMap.servo.get("claw 2");
         //drag1 = hardwareMap.crservo.get("drag front");
         //drag2 = hardwareMap.crservo.get("drag back");
-        wrist = hardwareMap.crservo.get("wrist");
+        wrist = hardwareMap.servo.get("wrist");
+        claw2.setPosition(-.5);
+
     }
 
 
@@ -88,10 +91,10 @@ public class TeleOpCurrentNew2 extends OpMode {
         double bRightPower = Range.clip(move - rotation + crabWalk, -1.0, 1.0);
         // Assignment of motor power in relation to wheels
         frontLeft.setPower(fLeftPower/powerButton);
-        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         backLeft.setPower(bLeftPower/powerButton);
-        backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        backRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         frontRight.setPower(fRightPower/powerButton);
 
@@ -171,14 +174,21 @@ public class TeleOpCurrentNew2 extends OpMode {
         // claw1: 1=open, 0=closed
         // claw2: 0=open, 1=closed
 
-        // Open
+        // Open Left (claw 1 is on the left side of the bot)
         if (gamepad2.y) {
             claw1.setPosition(0.6);
-            claw2.setPosition(0.4);
         }
         // Close
         else if (gamepad2.x) {
             claw1.setPosition(0.4);
+        }
+
+        // Open Right (only OpenLeft will be used primarily) (claw 2 is the 'right' side of the bot)
+        if (gamepad2.b) {
+            claw2.setPosition(0.4);
+        }
+        // Close
+        else if (gamepad2.a) {
             claw2.setPosition(0.6);
         }
 
@@ -187,13 +197,15 @@ public class TeleOpCurrentNew2 extends OpMode {
         extendArm.setPower(-gamepad2.right_stick_y);
 
 
+
         //              ###WRIST###
         if (gamepad2.right_bumper)
-            wrist.setPower(0.5);
+            wrist.setPosition(.8);
         else if (gamepad2.left_bumper)
-            wrist.setPower(-0.5);
+            wrist.setPosition(.2);
         else
-            wrist.setPower(0);
+            wrist.setPosition(0.4
+            );
 
 
         //              ###ARM RAISING###
