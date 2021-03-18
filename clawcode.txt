@@ -1,0 +1,15 @@
+        // Left claw -- left claw values need testing
+        // Open
+        if (gamepad2.y)
+            claw1.setPosition(-0.6);
+        // Close
+        else if (gamepad2.x)
+            claw1.setPosition(0);
+
+        // Right claw
+        // Open
+        if (gamepad2.b)
+            claw2.setPosition(0.85);
+        // Close
+        else if (gamepad2.a)
+            claw2.setPosition(0.45);
