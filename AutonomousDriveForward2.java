@@ -69,10 +69,10 @@ public class AutonomousDriveForward2 extends OpMode
         /*
         ---USING STATES---
          */
+            
+        strafeLeft = new driveState(70, 1.0, motors, "left"); //here we are using encoders to strafe left
 
-        strafeLeft = new driveState(70, 1.0, motors, "left");
-
-        strafeLeft.setNextState(null);
+        strafeLeft.setNextState(null); //after strafing to the line, we park and our code is complete
 
     }
 
