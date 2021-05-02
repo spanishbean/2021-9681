@@ -22,8 +22,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 @TeleOp(name ="current teleop", group = "TeleOP")
 public class TeleopNewCurrent2 extends OpMode {
-    DcMotor frontRight;
-    DcMotor frontLeft;
+    DcMotor rightFront;
+    DcMotor leftFront;
     DcMotor backRight;
     DcMotor backLeft;
     DcMotor raiseArm1;
@@ -45,8 +45,8 @@ public class TeleopNewCurrent2 extends OpMode {
         // Hardware map is for phone
 
         //touchSense = hardwareMap.get(DigitalChannel.class, "sensor_digital");
-        frontRight = hardwareMap.dcMotor.get("front right");
-        frontLeft = hardwareMap.dcMotor.get("front left");
+        rightFront = hardwareMap.dcMotor.get("front right");
+        leftFront = hardwareMap.dcMotor.get("front left");
         backRight = hardwareMap.dcMotor.get("back right");
         backLeft = hardwareMap.dcMotor.get("back left");
         raiseArm1 = hardwareMap.dcMotor.get("raise arm");
